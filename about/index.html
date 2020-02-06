@@ -76,13 +76,6 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="is-3-column">
-<!-- 雪花特效 -->
-    <script type="text/javascript">
-      var windowWidth = $(window).width();
-      if (windowWidth > 480) {
-        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
-      }
-    </script>
     <nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -194,6 +187,30 @@
 
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'f0c3c66f70376e3c7e15',
+        clientSecret: 'ff8fca332eb5b034197f2d224bc623ec9a620021',
+        id: 'a7224db13f3a49096aa27c1876d1a947',
+        repo: 'captainnotseeingthesea.github.io',
+        owner: 'captainnotseeingthesea',
+        admin: "captainnotseeingthesea",
+        createIssueManually: true,
+        distractionFreeMode: true
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
 </div>
                 
 
