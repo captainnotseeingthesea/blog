@@ -350,47 +350,41 @@
     
         <div class="card widget">
     <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
+        <div class="menu links">
+    <h3 class="menu-label">
+        链接
+    </h3>
+    <ul class="menu-list">
         
-            <li>
-                <a class="level is-mobile" href="https://google.com" target="_blank" rel="noopener">
-                    <span class="level-left">
+            
+                <li>
+                <a class="level is-mobile" href="https://google.com" target="_blank">
+                    <span class="level-left" style="text-decoration: underline">
                         <span class="level-item">Google</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">google.com</span>
-                    </span>
-                </a>
-            </li>
+                    </span> 
+                </a>      
+                
         
-            <li>
-                <a class="level is-mobile" href="https://baidu.com" target="_blank" rel="noopener">
-                    <span class="level-left">
+            
+                <a class="level is-mobile" href="https://baidu.com" target="_blank">
+                    <span class="level-right" style="text-decoration: underline">
                         <span class="level-item">Baidu</span>
                     </span>
-                    <span class="level-right">
-                        <span class="level-item tag">baidu.com</span>
-                    </span>
                 </a>
-            </li>
+                </li>
+            
         
-            <li>
-                <a class="level is-mobile" href="http://www.nudtproxy.yitlink.com/menu" target="_blank" rel="noopener">
-                    <span class="level-left">
+            
+                <li>
+                <a class="level is-mobile" href="http://www.nudtproxy.yitlink.com/menu" target="_blank">
+                    <span class="level-left" style="text-decoration: underline">
                         <span class="level-item">Library</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.nudtproxy.yitlink.com</span>
-                    </span>
-                </a>
-            </li>
+                    </span> 
+                </a>      
+                
         
-        </ul>
-        </div>
+    </ul>
+</div>
     </div>
 </div>
 
@@ -594,10 +588,11 @@
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                 
                 <br>
-                <span id="busuanzi_container_site_uv">
-                共<span id="busuanzi_value_site_uv">0</span>个访客
-                </span>
-                
+				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+				<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span>本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次</span>
+                <span>| 本站访客数<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>人次</span>
+				
                 </p>
             </div>
             <div class="level-end">
@@ -764,5 +759,11 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+	<script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+	</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

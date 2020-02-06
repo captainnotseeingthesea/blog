@@ -142,8 +142,8 @@ img.thumbnail {
 .widget .menu-list a.level {
   display: flex;
 }
-.widget .has-text-centered figure.image {
-  margin: auto;
+.widget .links .menu-list a.level {
+  display: inline-block;
 }
 .pagination .pagination-link:not(.is-current),
 .pagination .pagination-previous,
