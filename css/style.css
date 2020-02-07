@@ -15,13 +15,20 @@ textarea {
   font-family: "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
 }
 @media screen and (min-width: 1280px) {
-  .is-1-column .container,
-  .is-2-column .container {
+  .is-3-column .container {
+    max-width: 1216px;
+    width: 1216px;
+  }
+  .is-1-column .container .is-2-column .container {
     max-width: 960px;
     width: 960px;
   }
 }
 @media screen and (min-width: 1472px) {
+  .is-3-column .container {
+    max-width: 1344px;
+    width: 1344px;
+  }
   .is-2-column .container {
     max-width: 1152px;
     width: 1152px;
@@ -203,14 +210,17 @@ img.thumbnail {
 .article .content {
   font-size: 1.1rem;
 }
-letter-spacing: 0.08rem blockquote.pullquote {
+.article .content blockquote.pullquote {
   float: right;
   max-width: 50%;
   font-size: 1.15rem;
   position: relative;
 }
-letter-spacing: 0.08rem a {
+.article .content a {
   word-wrap: break-word;
+}
+.article .content {
+  letter-spacing: 0.08rem;
 }
 .rtl {
   direction: rtl;
@@ -531,4 +541,17 @@ figure.highlight .section {
 }
 .gist .file {
   all: initial;
+}
+/* ---------------------------------
+ *        copyright
+ * --------------------------------- */
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #ff1700;
+  background-color: #f9f9f9;
+  list-style: none;
+}
+.post-copyright li {
+  line-height: 30px;
 }
