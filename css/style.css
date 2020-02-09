@@ -19,7 +19,8 @@ textarea {
     max-width: 1216px;
     width: 1216px;
   }
-  .is-1-column .container .is-2-column .container {
+  .is-1-column .container,
+  .is-2-column .container {
     max-width: 960px;
     width: 960px;
   }
