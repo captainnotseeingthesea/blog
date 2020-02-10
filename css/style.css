@@ -220,6 +220,10 @@ img.thumbnail {
 .article .content a {
   word-wrap: break-word;
 }
+.article .content a img {
+  margin: auto;
+  display: block;
+}
 .article .content {
   letter-spacing: 0.08rem;
 }
