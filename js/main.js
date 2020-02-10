@@ -148,7 +148,7 @@
         if (!sitehost) return false;
 
         // handle relative url
-        const data = new URL(input, '//' + sitehost);
+        const data = new URL(input, 'http://' + sitehost);
 
         // handle mailto: javascript: vbscript: and so on
         if (data.origin === 'null') return false;
