@@ -16,6 +16,7 @@
 
 .music-container p{
     clear: both;
+	margin: 1.6em 0;
 }
 
 .music-container #musiclist{
@@ -119,11 +120,4 @@
         border-radius: 6px;
     }
 
-    .music-container #gitalk-container{
-        display:none;
-    }
-}
-
-.social-share {
-    text-align: center;
 }

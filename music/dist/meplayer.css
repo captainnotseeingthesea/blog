@@ -339,28 +339,28 @@
     transition: all .5s;
 }
 
-.meplayer-container .meplayer-control-play .icon-play {
+.meplayer-container .meplayer-control-play .picon-play {
     -webkit-transform: translateX(2px);
             transform: translateX(2px);
 
     opacity: 1;
 }
 
-.meplayer-container.meplayer-isplaying .meplayer-control-play .icon-play {
+.meplayer-container.meplayer-isplaying .meplayer-control-play .picon-play {
     -webkit-transform: translateX(8px);
             transform: translateX(8px);
 
     opacity: 0;
 }
 
-.meplayer-container .meplayer-control-play .icon-pause {
+.meplayer-container .meplayer-control-play .picon-pause {
     -webkit-transform: translateX(-8px);
             transform: translateX(-8px);
 
     opacity: 0;
 }
 
-.meplayer-container.meplayer-isplaying .meplayer-control-play .icon-pause {
+.meplayer-container.meplayer-isplaying .meplayer-control-play .picon-pause {
     -webkit-transform: translateX(-1px);
             transform: translateX(-1px);
 
@@ -499,11 +499,13 @@
 }
 
 .meplayer-container-mini {
-    position: relative;
+    position: fixed;
     width: 90px;
     height: 90px;
     background: #FFF;
     border-radius: 50%;
+    right: 10px;
+    bottom: 10px;
     box-shadow: 0 0 20px rgba(59, 59, 177, .18);
 }
 
@@ -531,7 +533,7 @@
     color: #D94240;
 }
 
-.meplayer-container-mini .meplayer-control-play [class^='icon-'] {
+.meplayer-container-mini .meplayer-control-play [class^='picon-'] {
     line-height: 90px;
 
     position: absolute;
@@ -545,25 +547,25 @@
     cursor: pointer;
 }
 
-.meplayer-container-mini .meplayer-control-play .icon-play {
+.meplayer-container-mini .meplayer-control-play .picon-play {
     -webkit-transform: translateX(4px);
     transform: translateX(4px);
     opacity: 1;
 }
 
-.meplayer-container-mini.meplayer-isplaying .meplayer-control-play .icon-play {
+.meplayer-container-mini.meplayer-isplaying .meplayer-control-play .picon-play {
     -webkit-transform: translateX(16px);
     transform: translateX(16px);
     opacity: 0;
 }
 
-.meplayer-container-mini .meplayer-control-play .icon-pause {
+.meplayer-container-mini .meplayer-control-play .picon-pause {
     -webkit-transform: translateX(-16px);
     transform: translateX(-16px);
     opacity: 0;
 }
 
-.meplayer-container-mini.meplayer-isplaying .meplayer-control-play .icon-pause {
+.meplayer-container-mini.meplayer-isplaying .meplayer-control-play .picon-pause {
     -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
@@ -734,7 +736,7 @@
 }
 */
 
- [class^="icon-"]:before, [class*=" icon-"]:before {
+ [class^="picon-"]:before, [class*=" picon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -749,8 +751,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-play:before { content: '\e801'; } /* '' */
-.icon-pause:before { content: '\e802'; } /* '' */
-.icon-clock:before { content: '\e803'; } /* '' */
-.icon-volume:before { content: '\e804'; } /* '' */
-.icon-spin:before { content: '\e800'; } /* '' */
+.music-container .picon-play:before { content: '\e801'; } /* '' */
+.music-container .picon-pause:before { content: '\e802'; } /* '' */
+.music-container .picon-clock:before { content: '\e803'; } /* '' */
+.music-container .picon-volume:before { content: '\e804'; } /* '' */
+.music-container .picon-spin:before { content: '\e800'; } /* '' */

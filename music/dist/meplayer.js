@@ -71,8 +71,9 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var root = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) == 'object' && window.window === window ? window : (typeof global === 'undefined' ? 'undefined' : _typeof(global)) == 'object' && global.global === global ? global : undefined;
-
-	root.mePlayer = function (options) {
+	root.lyricArea;
+	root.mePlayerMethod = {}
+	root.mePlayer = function (options, endcallback) {
 	  // 检查必填选项
 	  if (!(options.music && options.music.src)) {
 	    console.error('必须指定音乐地址哦~');
@@ -88,7 +89,7 @@
 	      autoplay = options.autoplay,
 	      currentThemeClass = theme === _constants.THEME_DEFAULT ? 'meplayer-container' : 'meplayer-container-mini',
 	      containerClass = currentThemeClass + ' ' + (hasLrc ? 'meplayer-haslrc' : '') + ' meplayer-isloading',
-	      playerHTMLContent = '<div class="' + containerClass + '">\n                             <audio src=' + musicConf.src + ' preload="auto"></audio>\n                             <div class="meplayer-info">\n                             <div class="meplayer-info-cover"><img src=' + coverSrc + ' alt="cd-cover"></div>\n                             <div class="meplayer-meta">\n                             <div class="meplayer-meta-title">' + musicConf.title + '</div>\n                             <div class="meplayer-meta-author">' + musicConf.author + '</div>\n                             <div class="meplayer-meta-time-tick"><span class="meplayer-meta-time-tick-text"></span></div>\n                             </div>\n                             </div>\n                             <canvas class="meplayer-spectrum"></canvas>\n                             <div class="meplayer-lyric"><div class="meplayer-lyric-area"></div></div>\n                             <div class="meplayer-control"><div class="meplayer-control-play"><i class="icon-play"></i><i class="icon-pause"></i></div></div>\n                             <div class="meplayer-volume-bg"><div class="meplayer-volume"><i class="icon-volume"></i><div class="meplayer-volume-progress"></div></div></div>\n                             <div class="meplayer-duration"><i class="icon-clock"></i><span class="meplayer-duration-text">loading</span></div>\n                             <div class="meplayer-loadingsign"><i class="icon-spin animate-spin"></i>loading</div>\n                             <div class="meplayer-timeline-bg"><div class="meplayer-timeline"><div class="meplayer-timeline-passed"></div></div></div>\n                             </div>';
+	      playerHTMLContent = '<div class="' + containerClass + '">\n                             <audio src=' + musicConf.src + ' preload="auto"></audio>\n                             <div class="meplayer-info">\n                             <div class="meplayer-info-cover"><img src=' + coverSrc + ' alt="cd-cover"></div>\n                             <div class="meplayer-meta">\n                             <div class="meplayer-meta-title">' + musicConf.title + '</div>\n                             <div class="meplayer-meta-author">' + musicConf.author + '</div>\n                             <div class="meplayer-meta-time-tick"><span class="meplayer-meta-time-tick-text"></span></div>\n                             </div>\n                             </div>\n                             <canvas class="meplayer-spectrum"></canvas>\n                             <div class="meplayer-lyric"><div class="meplayer-lyric-area"></div></div>\n                             <div class="meplayer-control"><div class="meplayer-control-play"><i class="picon-play"></i><i class="picon-pause"></i></div></div>\n                             <div class="meplayer-volume-bg"><div class="meplayer-volume"><i class="picon-volume"></i><div class="meplayer-volume-progress"></div></div></div>\n                             <div class="meplayer-duration"><i class="picon-clock"></i><span class="meplayer-duration-text">loading</span></div>\n                             <div class="meplayer-loadingsign"><i class="picon-spin animate-spin"></i>loading</div>\n                             <div class="meplayer-timeline-bg"><div class="meplayer-timeline"><div class="meplayer-timeline-passed"></div></div></div>\n                             </div>';
 
 	  target.innerHTML = playerHTMLContent;
 
@@ -107,7 +108,7 @@
 	      canvas = _selector$init$select2[9],
 	      duration;
 
-
+		root.lyricArea = lyricArea;
 	  if (hasLrc) {
 	    lyric.parse(musicConf.lrc).renderTo(lyricArea);
 	  } else {
@@ -122,7 +123,7 @@
 	  }
 
 	  // 重定义meplayer
-	  root.mePlayer = {
+	  root.mePlayerMethod = {
 	    play: play,
 	    pause: pause,
 	    toggleTheme: toggleTheme
@@ -141,7 +142,8 @@
 	    if (loop) {
 	      audio.play();
 	    } else {
-	      utils.removeClass(meplayerContainer, 'meplayer-isplaying');
+				utils.removeClass(meplayerContainer, 'meplayer-isplaying');
+				endcallback();
 	    }
 	  }
 
@@ -198,7 +200,8 @@
 	    var _handleMouseWheel;
 
 	    if (audio.paused) {
-	      audio.play();
+				audio.play();
+				$("#p_message").show();
 	      if (theme === _constants.THEME_DEFAULT && !hasLrc) {
 	        spectrum.draw();
 	      }
@@ -233,7 +236,8 @@
 	        return _handleMouseWheel;
 	      }());
 	    } else {
-	      audio.pause();
+				audio.pause();
+				$("#p_message").hide();
 	      spectrum.stop();
 	      meplayerContainer.removeEventListener('mousewheel', _handleMouseWheel);
 	    }
@@ -249,16 +253,23 @@
 	  function play() {
 	    if (audio.paused) {
 	      utils.addClass(meplayerContainer, 'meplayer-isplaying');
-	      audio.play();
+				audio.play();
+				$("#p_message").show();
+				if(window.Notification && Notification.permission !== "denied") {
+					Notification.requestPermission(function(status) {
+						var n = new Notification(musicConf.title, {body:'开始播放' + musicConf.author + '的' + musicConf.title, icon:musicConf.cover}); 
+					});
+				}
 	    }
 	  }
 
 	  function pause() {
 	    if (!audio.paused) {
 	      utils.removeClass(meplayerContainer, 'meplayer-isplaying');
-	      audio.pause();
+				audio.pause();
+				$("#p_message").hide();
 	    }
-	  }
+		}
 
 	  function toggleTheme() {
 	    var step = 0.03;
@@ -287,8 +298,10 @@
 	          utils.removeClass(meplayerContainer, 'meplayer-changing-theme');
 	        }, 500);
 	      }
-	    }
-	  }
+			}
+			return theme;
+		}
+	
 	};
 
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
