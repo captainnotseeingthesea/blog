@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<script src="/js/src/click.js"></script>
+<script type="text/javascript" src="//apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>The Diode and The MOSFET Transistor - Xuanyi&#39;s Blog</title>
+
+
+    <meta name="description" content="Some fundamental points of the diode and MOS transistor.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Diode and The MOSFET Transistor">
+<meta property="og:url" content="https://captainnotseeingthesea.github.io/2020/02/19/The-MOSFET-Transistor/index.html">
+<meta property="og:site_name" content="Xuanyi&#39;s Blog">
+<meta property="og:description" content="Some fundamental points of the diode and MOS transistor.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200220164249.jpg">
+<meta property="article:published_time" content="2020-02-19T11:56:00.000Z">
+<meta property="article:modified_time" content="2020-02-23T07:51:23.832Z">
+<meta property="article:author" content="Xuanyi Li">
+<meta property="article:tag" content="VLSI">
+<meta property="article:tag" content="MOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200220164249.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/avatar.jpg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="The Diode and The MOSFET Transistor" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/photos">相册</a>
+                
+                <a class="navbar-item"
+                href="/music">音乐</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://captainnotseeingthesea.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200220164249.jpg" alt="The Diode and The MOSFET Transistor">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+		<h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>The Diode and The MOSFET Transistor
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+				<i class="fas fa-calendar">&nbsp</i>
+                <time class="level-item has-text-grey" datetime="2020-02-19T11:56:00.000Z">2020-02-19</time>
+				
+					<i class="fas fa-calendar-check">&nbsp</i>
+					<time class="level-item has-text-grey" datetime="2020-02-23T07:51:23.832Z">2020-02-23</time>
+				
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/study/">study</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/study/digital-circuit/">digital circuit</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+					<i class="fas fa-book-reader">&nbsp</i>
+                    
+                    
+                    31 分钟 读完 (大约 4605 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-eye"></i>
+					<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+			
+				Some fundamental points of the diode and MOS transistor.
+				<hr>
+				<h2 id="1-The-Diode"><a href="#1-The-Diode" class="headerlink" title="1 The Diode"></a>1 The Diode</h2><h3 id="1-1-Significance"><a href="#1-1-Significance" class="headerlink" title="1.1 Significance"></a>1.1 Significance</h3><ul>
+<li><strong>Reverse-biased diodes are quite omnipresent in today’s MOS digital IC</strong><br>In the design of digital circuits, we want the current to flow along the channel, that is from the drain of the transistor to the source of the transistor horizontally rather than from the source or drain of the transistor to the substrate. Therefore in this case, biasing the diode reversely seems very necessary, which directly impacts the behavior of the device. </li>
+<li><strong>Diodes can also be wielded to protect the input devices of an IC against Electrostatic Discharge(ESD)</strong><br>Static electricity is very common  in our daily life. For example, if we walk on a synthetic carpet in a room with the relative humidity of 80% or more, a voltage potential up to 1.5KV or more will be accumulated. Therefore, we can accumulate a voltage of 1.5KV or more in our finger and if we touch an object, we can find sparks jumping from our finger. Likewise, if we touch the chip with our finger, the chip may be punctured at such high voltage. Then we can utilize a diode to connect a pad with ground and the current will flow through this diode to the ground. So we use diode to protect our chip from punctured by the ESD.</li>
+</ul>
+<h3 id="1-2-Depletion-Region"><a href="#1-2-Depletion-Region" class="headerlink" title="1.2 Depletion Region"></a>1.2 Depletion Region</h3><p>We all know the fundamental of the generation of P-N junction and the reason is the concentration gradient. There is a depletion region at the P-N junction and this region is also called space charged region or high impedance region. We can calculate the built-in potential of this region as follows:<br>$$ \phi_0 = \phi_T\ln\left( \frac {N_A N_D} {n_i^2} \right) \tag{1.1} $$<br>where N<sub>A</sub> stands for the acceptor concentration and N<sub>D</sub> stands for the donor concentration and n<sub>i</sub> stands for the intrinsic carrier concentration in a pure sample of semiconductor and its value is $1.5 \times 10^{10} cm^{-3}$ and $\phi_T$ is thermal voltage representing the voltage when the temperature equals 300K and it can be represented by the following expression:<br>$$ \phi_T = \frac {kT} q = 26mV\ (T = 300K) \tag{1.2} $$<br>where k stands for Boltzmann constant. From the formula (1.2), we can get that at room temperature the built-in potential of silicon normally ranges from 0.6V to 0.8V and that of germanium ranges from 0.2V to 0.4V.</p>
+<h3 id="1-3-Static-behavior"><a href="#1-3-Static-behavior" class="headerlink" title="1.3 Static behavior"></a>1.3 Static behavior</h3><p>Static behavior is robust and integrate and unsensitive to the noise.</p>
+<h4 id="1-3-1-Forward-Bias"><a href="#1-3-1-Forward-Bias" class="headerlink" title="1.3.1 Forward Bias"></a>1.3.1 Forward Bias</h4><p>In this case, the two terminals of the PN diode are applied forward biased voltage and the built-in voltage potential is counteracted by the external forward biased voltage. Therefore, the depletion region will shrink and the width of this region will be reduced. In this scenario, the diffusion current dominates the drift current.<br>While in Digital ICs, this should be avoided because we don’t want the other current flow in the diode except the current flowing along the channel. </p>
+<h4 id="1-3-2-Reverse-Bias"><a href="#1-3-2-Reverse-Bias" class="headerlink" title="1.3.2 Reverse Bias"></a>1.3.2 Reverse Bias</h4><p>In this case, the two terminals of the PN diode are applied reverse biased voltage and then the width of built-in potential of the depletion region will be widen and the electrical field will be strengthened. At this time, the drift current will dominate the diffusion current and because the current is generated by the minority carrier, the current is quite weak. It’s fair to say that there is hardly no current flow through the PN junction.<br>In digital ICs, this is the dominant operation mode because there is no current flowing from source or drain to the substrate.</p>
+<h4 id="1-3-3-Ideal-diode-equation"><a href="#1-3-3-Ideal-diode-equation" class="headerlink" title="1.3.3 Ideal diode equation"></a>1.3.3 Ideal diode equation</h4><p>The current through the PN diode equals I<sub>D</sub> which can be expressed as follows:<br>$$  I_D = I_S(e^{V_D \over \phi_T} - 1) \tag{1.3} $$<br>where I<sub>S</sub> stands for saturation current. This equation indicates that diode current acts as a function of the bias voltage. </p>
+<h4 id="1-3-4-First-order-diode-model"><a href="#1-3-4-First-order-diode-model" class="headerlink" title="1.3.4 First-order diode model"></a>1.3.4 First-order diode model</h4><p>From the above equation ,we can find this ideal diode model is accurate but nonlinear so it is unwieldy for hand calculation. Therefore we introduce first-order diode model to simplify the calculation. In this case, we assume the voltage drop of the diode lies in a narrow range from 0.6V to 0.8V. The result of this model is as same as that of the ideal one so it is accurate enough for hand calculation and it is handy enough for manual manipulation.</p>
+<h3 id="1-4-Dynamic-behavior"><a href="#1-4-Dynamic-behavior" class="headerlink" title="1.4 Dynamic behavior"></a>1.4 Dynamic behavior</h3><p>Dynamic behavior stands for the performance.</p>
+<h4 id="1-4-1-Capacitor-of-the-depletion-region"><a href="#1-4-1-Capacitor-of-the-depletion-region" class="headerlink" title="1.4.1 Capacitor of the depletion region"></a>1.4.1 Capacitor of the depletion region</h4><p>If we apply forward biased voltage on the terminals of the PN diode, and the depletion region will shrink. If we increase the voltage the width of depletion region will reduce  otherwise increase. Here, depletion-region width can be calculated in the following formula:<br>$$ W_j = \sqrt {(\frac {2\varepsilon_{si}} {q} \frac {N_A + N_D} {N_A N_D})(\phi_0 - V_D)} \tag{1.4}$$<br>We can also calculate the depletion-region charge with the equation as follows:<br>$$ Q_j = A_D \sqrt {(2\varepsilon_{si} q \frac {N_A N_D} {N_A + N_D})(\phi_0 - V_D)} \tag{1.5} $$<br>where A<sub>D</sub> stands for the area of the plate. Then we can calculate the depletion region capacitance with the following equation:<br>$$ C_j  = \frac {\varepsilon_{si} A_D} {W_j} = - \frac {dQ_j} {dV_D} = \frac {A_D \sqrt {(2\varepsilon_{si} q \frac {N_A N_D} {N_A + N_D})\phi_0^{-1}}} {\sqrt {1 - \frac {V_D} {\phi_0}}} = \frac {C _ {j0}} {(1 - \frac {V_D}{\phi_0})^{\frac 1 2}} \tag{1.6} $$<br>where &varepsilon;<sub>si</sub> stands for the permittivity of dielectric and C<sub>j0</sub> stands for the numerator of the front equation. C<sub>j0</sub> is actually the junction capacitance on the 0 bias voltage.<br>There is a generic expression for the junction capacitance as follows:<br>$$ C_j = A_D \times  \frac {C _ {j0}} {(1 - \frac {V_D}{\phi_0})^m} \tag{1.7} $$<br>where m stands for the grading efficient. If the transition from one type of doping to another type of doping is abrupt, m equals 0.5 and if that is gradual, m equals 0.33. *<em>Note that *</em>This expression is accurate as long as V<sub>D</sub>&lt;&varphi;<sub>0</sub> otherwise should be revised.</p>
+<h4 id="1-4-2-Equivalent-capacitance-module"><a href="#1-4-2-Equivalent-capacitance-module" class="headerlink" title="1.4.2 Equivalent capacitance module"></a>1.4.2 Equivalent capacitance module</h4><p>From the above expression of the junction capacitance, we can find that the equation is too unwieldy to calculate by hand. Therefore, we need to introduce an equivalent, linear capacitance C<sub>eq</sub> which makes sure the same amount of charge is transferred for a given voltage swing from V<sub>high</sub> to V<sub>low</sub> as would be predicted by the nonlinear module. We can define C<sub>eq</sub> as follows:<br>$$ C _ {eq} = \frac { \Delta Q_j} {\Delta V_D} = \frac {Q_j (V _ {high}) - Q_j(V _ {low})} {V _ {high} - V _ {low}} = \frac 1 {V _ {high} - V _ {low}} \int_{V _ {low}}^{V _ {high}}C_j(V)dV = K _ {eq} C _ {j0} \tag{1.8} $$<br>where K<sub>eq</sub> named as <strong>linearizing factor</strong> or <strong>voltage equivalent factor</strong> can be expressed as follows (0 &lt; K<sub>eq</sub> &lt; 1):<br>$$ K _ {eq} = \frac {-\phi_0^m} {(V _ {high} - V _ {low})(1 - m)} [(\phi_0 - V _ {high})^{1 - m} - (\phi_0 - V _ {low}) ^ {1 - m}] \tag{1.9} $$<br>where m stands for the grading efficient stated above. For abrupt junction <strong>(m = 0.5)</strong>, the expression of K<sub>eq</sub> can be rewritten as follows:<br>$$ K _ {eq} = \frac {-2 \sqrt {\phi_0}} {(V _ {high} - V _ {low})} [\sqrt {\phi_0 - V _ {high}} - \sqrt{\phi_0 - V _ {low}]} \tag{1.10} $$<br>Therefore we can use this equation to calculate the capacitance very handily and the precision of this model is high enough for first order analysis.</p>
+<h3 id="1-5-Secondary-Effects"><a href="#1-5-Secondary-Effects" class="headerlink" title="1.5 Secondary Effects"></a>1.5 Secondary Effects</h3><h4 id="1-5-1-Resister-in-the-doped-neutral-regions"><a href="#1-5-1-Resister-in-the-doped-neutral-regions" class="headerlink" title="1.5.1 Resister in the doped neutral regions"></a>1.5.1 Resister in the doped neutral regions</h4><p>In reality, we find that the current flowing in the PN diode is smaller than the one predicted by the model. That is because in the neutral region, there are still some resistances there. So this effect can be modeled by adding a resistors is series with P and N region.</p>
+<h4 id="1-5-2-Avalanche-breakdown"><a href="#1-5-2-Avalanche-breakdown" class="headerlink" title="1.5.2 Avalanche breakdown"></a>1.5.2 Avalanche breakdown</h4><p>If we apply the reverse biased voltage on the terminals of PN diode and we increase the reverse voltage, sometimes we can find the current suddenly increases which is induced by the avalanche breakdown.<br>The reason why avalanche breakdown appears is that carriers become more and more excited as we increase the voltage and carriers collide with immobile atoms which will generate more carriers which may generate large current. This effect is not destructive and if the reverse bias is removed, the effect will disappear. But if we maintain high reverse voltage for a long time, high current level and high heat dissipation might cause permanent damage to the device.</p>
+<h3 id="1-6-SPICE-Diode-Model"><a href="#1-6-SPICE-Diode-Model" class="headerlink" title="1.6 SPICE Diode Model"></a>1.6 SPICE Diode Model</h3><p>Figure (1-1) shows the SPICE diode model.<br><img src="spice_diode_model.png" alt="Figure 1-1 SPICE diode model"><br>From the foil, we can see there is a resistor in series with the current source and a capacitor parallel with the current source.<br>The expression of nonlinear current source hear is a bit different from what we talked above.<br>$$  I_j = I_S(e^{V_j \over {n\phi_T}} - 1) \tag{1.11} $$<br>where n stands for the emission coefficient indicating the recombination of the carriers in depletion region. There is another expression of the nonlinear capacitance as formula(1.12) shows.<br>$$ C_j = \frac {C _ {j0}} {(1 - \frac {V_j}{\phi_0})^m} + \frac {\tau_T} {\phi_T} I_S e^{\frac {V_j} {n\phi_T}} \tag{1.12} $$<br>where the last term in the above equation stands for excess minority carrier charge and can be neglected under reverse-bias conditions.<br>The following table records the SPICE parameters of the diode.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Parameter Name</th>
+<th align="center">Symbol</th>
+<th align="center">SPICE Name</th>
+<th align="center">Units</th>
+<th align="center">Default Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Saturation current</td>
+<td align="center">I<sub>S</sub></td>
+<td align="center">IS</td>
+<td align="center">A</td>
+<td align="center">1.0 E-14</td>
+</tr>
+<tr>
+<td align="center">Emission coefficient</td>
+<td align="center">n</td>
+<td align="center">N</td>
+<td align="center">-</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Series resistance</td>
+<td align="center">R<sub>S</sub></td>
+<td align="center">RS</td>
+<td align="center">&Omega;</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Transit time</td>
+<td align="center">&tau;<sub>T</sub></td>
+<td align="center">TT</td>
+<td align="center">sec</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Zero-bias junction capacitance</td>
+<td align="center">C<sub>j0</sub></td>
+<td align="center">CJ0</td>
+<td align="center">F</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Grading coefficient</td>
+<td align="center">m</td>
+<td align="center">M</td>
+<td align="center">-</td>
+<td align="center">0.5</td>
+</tr>
+<tr>
+<td align="center">Junction potential</td>
+<td align="center">&phi;<sub>0</sub></td>
+<td align="center">VJ</td>
+<td align="center">V</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h2 id="2-The-MOSFET"><a href="#2-The-MOSFET" class="headerlink" title="2 The MOSFET"></a>2 The MOSFET</h2><h3 id="2-1-Introduction"><a href="#2-1-Introduction" class="headerlink" title="2.1 Introduction"></a>2.1 Introduction</h3><h4 id="2-1-1-Structure"><a href="#2-1-1-Structure" class="headerlink" title="2.1.1 Structure"></a>2.1.1 Structure</h4><p>MOSFET is an acronym and the full name is Mental Oxide Semiconductor Field Effect Transistor. People usually regard the MOS as a three-terminal device, however, the MOS actually has four terminals which are source, drain, gate and bulk respectively. Besides these terminals, there are also field oxide and gate oxide.<br>How can we identify which terminal is source and which terminal is drain. The easiest way to recognize is to compare the voltage potential of these two terminals. In term of NMOS, if the voltage of this terminal is higher than another one ,then this terminal is drain of the transistor otherwise this terminal is source of the transistor. On the contrary, in terms of PMOS, the method is opposite to that of the NMOS.</p>
+<h4 id="2-1-2-Significance"><a href="#2-1-2-Significance" class="headerlink" title="2.1.2 Significance"></a>2.1.2 Significance</h4><p>MOSFETs are widely used in digital circuit design as well as in analog circuit design. The main advantages if MOS can be briefly listed as follows:</p>
+<ul>
+<li>Function as a switch</li>
+<li>Few parasitic effects</li>
+<li>High integration density</li>
+<li>Simple manufacturing process</li>
+<li>Insensitive to the variation of the process<br>The significance of body is to modulate the device characteristics and parameters.</li>
+</ul>
+<h4 id="2-1-3-Essence"><a href="#2-1-3-Essence" class="headerlink" title="2.1.3 Essence"></a>2.1.3 Essence</h4><p>Actually, MOS transistor is nothing more than a switch from view of digital IC. The reason is that when the transistor is off, the resistance is infinite otherwise when the transistor is on, the resistance is finite. Therefore, MOS transistor can be regarded as switch.<br>If V<sub>GS</sub> &lt; V<sub>T</sub>, then the transistor is off otherwise the transistor is on. Viewing the transistor as switch can help us simplify the analysis of complex circuits.</p>
+<h3 id="2-2-Static-Behavior"><a href="#2-2-Static-Behavior" class="headerlink" title="2.2 Static Behavior"></a>2.2 Static Behavior</h3><p>As same as the analysis of the diode, static behavior indicates the robustness, integrity, low sensitiveness to the noise of the circuits.</p>
+<h4 id="2-2-1-The-formation-of-conducting-channel"><a href="#2-2-1-The-formation-of-conducting-channel" class="headerlink" title="2.2.1 The formation of conducting channel"></a>2.2.1 The formation of conducting channel</h4><p>At first, if we do not apply voltage on the transistor, there is no conducting channel. In terms of NMOS, we apply a positive voltage between the gate and source and connect both bulk and drain to the ground.<br>If we increase the V<sub>GS</sub> gradually, then the holes in the substrate beside the gate will be repelled to the bottom of the substrate and immobile negative charged ions will stay put. At this time, depletion region appears between gate oxide and the substrate. If we increase the V<sub>GS</sub> further at the point where the voltage potential at the surface is equal to <strong>two times of Fermi potential</strong> , then the electron in the n<sup>+</sup> region will be extracted to the channel. At this time when strong inversion occurs, threshold voltage V<sub>T</sub> represents the value of V<sub>GS</sub> and this area is inverted to the n region.<br><strong>Note that the V<sub>T</sub> here is different from the switch threshold or gate threshold V<sub>M</sub>.</strong> </p>
+<h4 id="2-2-2-Calculation-of-the-threshold-voltage-cut-off-region"><a href="#2-2-2-Calculation-of-the-threshold-voltage-cut-off-region" class="headerlink" title="2.2.2 Calculation of the threshold voltage(cut-off region)"></a>2.2.2 Calculation of the threshold voltage(cut-off region)</h4><p><strong>If V<sub>SB</sub> = 0</strong>, V<sub>T</sub> can be expressed as:<br>$$ V_T = \phi_{GC} - 2\phi_F - \frac {Q _ {B0}} {C _ {ox}} - \frac {Q _ {ox}} {C _ {ox}} - \frac {Q_I} {C _ {ox}} \tag{2.1} $$<br>where &phi;<sub>GC</sub> stands for the difference in work function between gate and substrate and &phi;<sub>F</sub> stands for Fermi potential which normally equals -0.3V and Q<sub>B0</sub> stands for the charge of impurities trapped at the surface between gate and oxide and Q<sub>ox</sub> stands for gate oxide charge and Q<sub>I</sub> stands for dosage of ions implanted for the threshold adjustment.<br>All of these terms in this expression are material constants which is a function of manufacturing process and as IC designers, there is no need to care these parameters.<br><strong>If V<sub>SB</sub> &gt; 0</strong>, V<sub>T</sub> can be expressed as:<br>$$ V_T = V _ {T0} + \gamma(\sqrt {|{-2\phi_F + V _ {SB}} |} - \sqrt {|{-2\phi_F}|}) \tag{2.2} $$<br>where &gamma; stands for the body effect coefficient with the unite of V<sup>0.5</sup>. From this expression, we can find that if V<sub>SB</sub> &ne; 0, then V<sub>T</sub> will be increased. This equation expresses the impact of body-bias effect on the threshold voltage of the MOS transistor and IC designers must care. </p>
+<h4 id="2-2-3-Long-channel-device"><a href="#2-2-3-Long-channel-device" class="headerlink" title="2.2.3 Long channel device"></a>2.2.3 Long channel device</h4><h5 id="2-2-3-1-Linear-region"><a href="#2-2-3-1-Linear-region" class="headerlink" title="2.2.3.1 Linear region"></a>2.2.3.1 Linear region</h5><p>If we apply voltage at drain and make sure V<sub>DS</sub> is small and V<sub>GS</sub> &gt; V<sub>T</sub>, then V<sub>GS</sub> - V<sub>(x)</sub> exceeds V<sub>T</sub> all along the channel. Therefore Induced channel charge per unit area at point x can be expressed as:<br>$$ Q_i(x) = -C _ {ox} [V _ {GS} - V(x) - V_T] \ \ \  C _ {ox} = \frac {\varepsilon_{ox}} {t _ {ox}} \tag{2.3} $$<br>where C<sub>ox</sub> stands for the gate oxide capacitance per unit area and &varepsilon;<sub>ox</sub> stands for the permittivity of material dielectric and t<sub>ox</sub> stands for the thickness of gate oxide.<br>The Electron velocity can be expressed as:<br>$$ v_n = - \mu_n \xi (x) = \mu_n \frac {dV} {dx} \tag{2.4} $$<br>where &xi;(x) is the strength of the electrical field. Then channel current can be expressed as:<br>$$ I_D = -v_n(x) Q_i (x) W \tag{2.5} $$<br>and combine the above three equations(2.3 - 2.5):<br>$$ I_D dx = \mu_n C _ {ox} W(V _ {gs} - V_T - V)dV \tag{2.6} $$<br>and then we integrate the length and voltage of  this equation then we can get the IV relation as:<br>$$ I_D = \mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DS} - \frac {V _ {DS}^2} {2}] \ \ \ \ k_n^{‘}= \mu_n C _ {ox} \ \ \ \ k_n = k_n^{‘} \frac W L  \tag{2.7} $$<br>where k<sub>n</sub><sup>‘</sup> stands for process transconductance and K<sub>n</sub> stands for gain factor. Normally, V<sub>DS</sub><sup>2</sup> can be neglected for simplicity due to small V<sub>DS</sub>. </p>
+<h5 id="2-2-3-2-Saturation-region"><a href="#2-2-3-2-Saturation-region" class="headerlink" title="2.2.3.2 Saturation region"></a>2.2.3.2 Saturation region</h5><p>If we increase V<sub>DS</sub> further, at some time V<sub>GS</sub> - V(x) is less than V<sub>T</sub> and the channel will be pinched off at some point and the length of the channel is reduced. At this time, we can express the IV relation in following equations:<br>$$  \begin{split} I_D &amp;= k_n^{‘} \frac W L [(V _ {GS} - V_T)(V _ {GS} - V_T)  - \frac {(V _ {GS} - V_T) ^2} {2}] =  \frac {k_n^{‘}} 2 \frac W {L^{‘}}(V _ {GS} - V_T) ^2 \\[3ex]<br>&amp;= \frac 1 {1 - \frac {\Delta L} L} \frac {k_n^{‘}} 2 \frac W L (V _ {GS} - V_T) ^2 =  \frac {k_n^{‘}} 2 \frac W L (V _ {GS} - V_T) ^2 (1 + \lambda V _ {DS})  \ \ \ L^{‘} = L - \Delta L \end{split} \tag{2.8} $$<br>and this effect is called channel length modulation effect.<br><strong>In terms of long channel device, here we summarize the above IV relation as:</strong><br>$$ I_D =<br>\begin{cases}<br>0, &amp; (V _ {GS} \le V_T)  \\[3ex]<br>\mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DS} - \frac {V _ {DS}^2} {2}] \approx  \mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DS}], &amp;(V _ {GS} \gt V_T, V _ {DS} \lt V _ {GS} - V_T) \\[3ex]<br>\frac {k_n^{‘}} 2 \frac W L (V _ {GS} - V_T) ^2 (1 + \lambda V _ {DS}), &amp;(V _ {GS} \gt V_T, V _ {DS} \gt V _ {gs} - V_T)<br>\end{cases} \tag{2.9} $$</p>
+<h4 id="2-2-4-Short-channel-device"><a href="#2-2-4-Short-channel-device" class="headerlink" title="2.2.4 Short channel device"></a>2.2.4 Short channel device</h4><p>The difference between long channel device and short channel device is the length of the channel. Therefore, there is some difference between long channel device and short channel device as for static behavior.</p>
+<h5 id="2-2-4-1-IV-relation"><a href="#2-2-4-1-IV-relation" class="headerlink" title="2.2.4.1 IV relation"></a>2.2.4.1 IV relation</h5><p><strong>Note: when the electrical field along the channel reaches a critical value &xi;<sub>c</sub>, the velocity of carriers tends to saturate due to scattering effects. Normally, this value is about 1.5V/um to 2V/um which depends on the doping levels and vertical electrical field applied.</strong><br>Normally, u<sub>sat</sub> is equal to 10<sup>5</sup>m/s and the velocity of electron should be revised as:<br>$$ v =<br>\begin{cases}<br>\frac {\mu_n \xi} {1 + \frac \xi {\xi_c}}, &amp; \xi \le \xi_c \\[3ex]<br>v _ {sat}, &amp; \xi \ge \xi_c<br>\end{cases} \tag{2.10} $$<br>Then we plug the above equation to the formula(2.5) then we can get the modified I<sub>D</sub> in resistive region as:<br>$$ \begin{split} I_D &amp;=  \frac {\mu_n C _ {ox}} {1 + \frac {V _ {DS}} {\xi_c L}} \frac W L [(V _ {GS} - V_T)V _ {DS} - \frac {V _ {DS}^2} {2}] \ \ \  \xi \le \xi_c \\[3ex]<br>&amp;= \mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DS} - \frac {V _ {DS}^2} {2}] \kappa(V _ {DS}) \end{split} \tag{2.11} $$<br>in which &kappa;(V) can be expressed as:<br>$$ \kappa (V) = \frac 1 {1 + \frac {V _ {DS}} {\xi_c L}} \tag{2.12} $$<br>From this equation, we can figure out:</p>
+<ul>
+<li>For long channel device or V<sub>DS</sub> is small, &kappa; approaches 1</li>
+<li>For short channel device, &kappa; &lt; 1 due to small L<br>Then we can also get I<sub>D</sub> expression in velocity saturation region as:<br>$$ \begin{split} I _ {DSAT} &amp;= v _ {sat} C _ {ox} W (V _ {GT} - V _ {DSAT}) \\[3ex]<br>&amp;= \kappa (V _ {DSAT}) \mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DSAT} - \frac {V _ {DSAT}^2} {2}] \ \ \ \xi \ge \xi_c \end{split} \tag{2.13} $$<br>At this time, $ v _ {sat} = \frac {\xi_c \mu_n} 2 $, we can plug it into above equation and yields:<br>$$ V _ {DSAT} = \kappa(V _ {GT})V _ {GT} \tag{2.14} $$<br>in which $V _ {GT} = V _ {GS} - V_T $.<br>Therefore, we can get some very important conclusions as follows:</li>
+<li>For short channel device and for large enough values V<sub>GT</sub>, &kappa;(V<sub>GT</sub>) is substantially less than 1 so V<sub>DSAT</sub> = &kappa;(V<sub>GT</sub>)V<sub>GT</sub> &lt; V<sub>GT</sub></li>
+<li>Short channel device enters saturation before V<sub>DS</sub> reaches V<sub>GS</sub> - V<sub>T</sub></li>
+<li>Short channel device experiences an extended saturation region than long channel device</li>
+</ul>
+<h5 id="2-2-4-2-Transition-of-the-state"><a href="#2-2-4-2-Transition-of-the-state" class="headerlink" title="2.2.4.2 Transition of the state"></a>2.2.4.2 Transition of the state</h5><p>In this section, we will briefly introduce the state transition process and these state are listed as follows .</p>
+<ol>
+<li><strong>V<sub>GS</sub> &gt; V<sub>T</sub>, V<sub>DS</sub> = 0</strong><br>At this time, the transistor is located in resistive region but there is no current flowing through the channel. If we increase V<sub>DS</sub> and the transistor will enter the second state.</li>
+<li><strong>V<sub>GS</sub> &gt; V<sub>T</sub>, V<sub>DS</sub> &gt; 0, $ \frac {V _ {DS}} L \lt \xi_c, \frac {V _ {DS}} L \lt \frac {V _ {GS} - V_T} L $</strong><br>At this time, the transistor is still located in resistive region and there is current flowing along the channel. If we increase V<sub>DS</sub> further and transistor may enter either the third state or fourth state first. It depends on the following condition.</li>
+<li><strong>V<sub>GS</sub> &gt; V<sub>T</sub>, $ \xi_c \le \frac {V _ {DS}} L \lt  \frac {V _ {GS} - V_T} L $</strong><br>At this time, the transistor enters the velocity saturation first and there is no pinch-off point in the channel but the velocity of the electrons reaches saturation.</li>
+<li><strong>V<sub>GS</sub> &gt; V<sub>T</sub>, $ \frac {V _ {GS} - V_T} L  \le \frac {V _ {DS}} L \le \xi_c $</strong><br>At this time, the transistor enters the traditional saturation first and there is pinch-off point in the channel but the velocity of electrons can sill increase with V<sub>DS</sub></li>
+</ol>
+<p><strong>Note:</strong> whether the transistor enters 3 or 4 first is determined by $\frac {V _ {DS}} L $ exceeds $ \xi_c$ or $\frac {V _ {GS} - V_T} L \ $ first.<br>By comparing the I<sub>DSAT</sub> of long channel device with that of short channel device, we can find that I<sub>DSAT</sub> is proportional to the square of supply voltage for long channel device while I<sub>DSAT</sub> is linear to the supply voltage which indicating that if we apply the same voltage at the transistor, there will be larger current in the long channel device.</p>
+<h5 id="2-2-4-3-Simplify-the-calculation"><a href="#2-2-4-3-Simplify-the-calculation" class="headerlink" title="2.2.4.3 Simplify the calculation"></a>2.2.4.3 Simplify the calculation</h5><p>First, we should assume that</p>
+<ul>
+<li>Velocity saturates abruptly at &xi;<sub>c</sub> and we can get formula(2.15).<br>$$ v =<br>\begin{cases}<br>\mu_n \xi, &amp; \xi \le \xi_c \\[3ex]<br>v _ {sat} = \mu_n \xi_c, &amp; \xi \ge \xi_c<br>\end{cases} \tag{2.15} $$</li>
+<li>V<sub>DSAT</sub> at which the critical electrical filed is reached and velocity saturation comes into play is constant and we can get formula(2.16).<br>$$ V _ {DSAT} \approx L \xi_c = \frac {L v _ {sat}} {\mu_n} \tag{2.16} $$<br>Then current equations for the resistive region remains unchanged from long channel one. Once V<sub>DSAT</sub> is reached, channel current will saturate abruptly as follows:<br>$$ \begin{split}<br>I _ {DSAT} &amp;= I_D (V _ {DS} = V _ {DSAT}) \\[3ex]<br>&amp;= \mu_n C _ {ox} \frac W L [(V _ {GS} - V_T)V _ {DSAT} - \frac {V _ {DSAT}^2} {2}] \\[3ex]<br>&amp;= v _ {sat} C _ {ox} W (V _ {GS} - V_T - \frac {V _ {DSAT}} 2)<br>\end{split} \tag{2.17} $$</li>
+</ul>
+<h5 id="2-2-4-4-A-unified-model"><a href="#2-2-4-4-A-unified-model" class="headerlink" title="2.2.4.4 A unified model"></a>2.2.4.4 A unified model</h5><p>For wieldy manual analysis, there is a unified model for short channel device.<br>$$ I_D =<br>\begin{cases}<br>0,&amp; V _ {GT} \le 0 \\[3ex]<br>k_n^{‘} \frac W L \left[ V _ {GT} V _ {min} - \frac {V _ {min}^2} 2 \right] (1 + \lambda V _ {DS}), &amp;V _ {GT} \gt 0 \end{cases} \tag{2.18} $$<br>$$ \begin{cases}<br>V _ {min} = min(V _ {GT}, V _ {DS}, V _ {DSAT}) \\[3ex]<br>V _ {GT} = V _ {GS} - V_T \\[3ex]<br>V_T = V _ {T0} + \gamma(\sqrt {|{-2\phi_F + V _ {SB}} |} - \sqrt {|{-2\phi_F}|})<br>\end{cases}  \tag{2.19} $$</p>
+<p>The following table provides some parameters for manual model of generic 0.25&mu;m CMOS process(minimum length device).</p>
+<table>
+<thead>
+<tr>
+<th align="center">&nbsp;</th>
+<th align="center">V<sub>T0</sub> (V)</th>
+<th align="center">&gamma;(V<sup>0.5</sup>)</th>
+<th align="center">V<sub>DSAT</sub>(V)</th>
+<th align="center">&kappa;’(A/V<sup>2</sup>)</th>
+<th align="center">&lambda;(V<sip>-1</sup>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NMOS</td>
+<td align="center">0.43</td>
+<td align="center">0.4</td>
+<td align="center">0.63</td>
+<td align="center">115&times;10<sup>-6</sup></td>
+<td align="center">0.06</td>
+</tr>
+<tr>
+<td align="center">PMOS</td>
+<td align="center">-04</td>
+<td align="center">-0.4</td>
+<td align="center">-1</td>
+<td align="center">-30&times;10<sup>-6</sup></td>
+<td align="center">-0.1</td>
+</tr>
+</tbody></table>
+<p>Here we summarize the conditions to enter different working regions.</p>
+<table>
+<thead>
+<tr>
+<th align="center">&nbsp;</th>
+<th align="center">Working conditions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cut-off region</td>
+<td align="center">V<sub>GS</sub> &lt; V<sub>T</sub></td>
+</tr>
+<tr>
+<td align="center">Resistive region</td>
+<td align="center">V<sub>GS</sub> &gt; V<sub>T</sub>, V<sub>DS</sub> &lt; V<sub>DSAT</sub>, V<sub>DS</sub> &lt; V<sub>GT</sub></td>
+</tr>
+<tr>
+<td align="center">Traditional Saturation region</td>
+<td align="center">V<sub>GS</sub> &gt; V<sub>T</sub>, V<sub>DS</sub> &ge; V<sub>GT</sub>, V<sub>DSAT</sub> &ge; V<sub>GT</sub></td>
+</tr>
+<tr>
+<td align="center">Velocity saturation region</td>
+<td align="center">V<sub>GS</sub> &gt; V<sub>T</sub>, V<sub>DS</sub> &gt; V<sub>DSAT</sub>, V<sub>GT</sub> &gt; V<sub>DSAT</sub></td>
+</tr>
+</tbody></table>
+<h4 id="2-2-5-Switch-mode-Resistor"><a href="#2-2-5-Switch-mode-Resistor" class="headerlink" title="2.2.5 Switch mode (Resistor)"></a>2.2.5 Switch mode (Resistor)</h4><p>In terms of the transistor, since R<sub>on</sub> is time varying, nonlinear and dependent on the operation point of the transistor, It’s attractive to replace R<sub>on</sub> with constant and linear resistance R<sub>eq</sub>.<br>Therefore, we can calculate the resistance over the period we care and the equivalent resistance R<sub>eq</sub> can be expressed as follows.<br>$$ \begin{split} R _ {eq} &amp;= average _ {t = t_1…t_2} \left( R _ {on}(t) \right) = \frac 1 {t_2 - t_1} \int_{t_1}^{t_2} \frac {V _ {DS}} {I_D(t)} dt \\[3ex]<br>&amp;= \frac 1 2 \left( R _ {on}(t_1) + R _ {on}(t_2) \right) \end{split} \tag{2.20} $$</p>
+<p>For example, look at the figure(2-1) where a capacitor is discharged through an NMOS transistor. We can calculate the equivalent resistance during this period.<br><img src="NMOS_capacitor.png" alt="Figure 2-1"><br>The resistance can be calculated by integrating over the period as follows.<br>$$ R _ {eq} = \frac 1 {- \frac {V _ {DD}} 2} \int_{V _ {DD}}^{\frac {V _ {DD}} 2} \frac {V _ {DS}} {I _ {DSAT}(1 + \lambda V _ {DS})}dV _ {DS} \approx \frac 3 4 \frac {V _ {DD}} {I _ {DSAT}}(1 - \frac 7 9 \lambda V _ {DD}) \tag{2.21} $$<br>The resistance can also be calculated by compute the average resistance of the start point and the end point.<br>$$ R _ {eq} = \frac 1 2 (\frac {V _ {DD}} {I _ {DSAT}(1 + \lambda V _ {DD})} + \frac {\frac {V _ {DD}} 2} {I _ {DSAT}(1 + \lambda \frac {V _ {DD}} 2 )} ) \approx  \frac 3 4 \frac {V _ {DD}} {I _ {DSAT}}(1 - \frac 5 6 \lambda V _ {DD}) \tag{2.22} $$</p>
+<p>From the expression(2.22), three conclusions can be drawn as follows:</p>
+<ul>
+<li>The resistance is inversely proportional to W/L;</li>
+<li>For V<sub>DD</sub> &gt;&gt; V<sub>T</sub> + V<sub>DSAT</sub>/2, the resistance becomes virtually independent of the supply voltage;</li>
+<li>Once the supply voltage approaches V<sub>T</sub>, the resistance dramatically increases.</li>
+</ul>
+<h3 id="2-3-Dynamic-behavior"><a href="#2-3-Dynamic-behavior" class="headerlink" title="2.3 Dynamic behavior"></a>2.3 Dynamic behavior</h3><p>In this section, we will briefly introduce MOS intrinsic capacitance which can be divided into three parts including MOS structure capacitance, channel capacitance and junction capacitance.</p>
+<h4 id="2-3-1-MOS-structure-capacitance"><a href="#2-3-1-MOS-structure-capacitance" class="headerlink" title="2.3.1 MOS structure capacitance"></a>2.3.1 MOS structure capacitance</h4><p>This capacitance originates from basic MOS structure.<br>Because of the process, the source and drain of the transistor will diffuse a little bit by amount of x<sub>d</sub> below polysilicon gate and this phenomenon is called lateral diffusion below polysilicon gate. Therefore, there will be the overlap capacitance between the gate oxide and diffusion area.<br>$$ \begin{split} C _ {GSO} = C _ {GDO} = C _ {ox}x_dW = C_oW \\[3ex]<br>\left (C _ {ox} = \frac {\varepsilon_{ox}} {t _ {ox}},\ \  C_o = C _ {ox}x_d \right) \end{split} \tag{2.23} $$<br>where C<sub>GSO</sub> means the overlap capacitance between the gate and source and C<sub>GDO</sub> means the overlap capacitance between the gate and source and C<sub>o</sub> is overlap capacitance per unit transistor width.</p>
+<h4 id="2-3-2-Channel-capacitance"><a href="#2-3-2-Channel-capacitance" class="headerlink" title="2.3.2 Channel capacitance"></a>2.3.2 Channel capacitance</h4><p>This capacitance originates from channel charge.<br>The following table summarizes the average distribution of channel capacitance of MOS Transistor.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Operation Region</th>
+<th align="center">C<sub>GCB</sub></th>
+<th align="center">C<sub>GCS</sub></th>
+<th align="center">C<sub>GCD</sub></th>
+<th align="center">C<sub>GC</sub></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cutoff</td>
+<td align="center">C<sub>ox</sub>WL<sub>eff</sub></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">C<sub>ox</sub>WL<sub>eff</sub></td>
+</tr>
+<tr>
+<td align="center">Resistive</td>
+<td align="center">0</td>
+<td align="center">C<sub>ox</sub>WL<sub>eff</sub>/2</td>
+<td align="center">C<sub>ox</sub>WL<sub>eff</sub>/2</td>
+<td align="center">C<sub>ox</sub>WL<sub>eff</sub></td>
+</tr>
+<tr>
+<td align="center">Saturation</td>
+<td align="center">0</td>
+<td align="center">(2/3)C<sub>ox</sub>WL<sub>eff</sub></td>
+<td align="center">0</td>
+<td align="center">(2/3)C<sub>ox</sub>WL<sub>eff</sub></td>
+</tr>
+</tbody></table>
+<h4 id="2-3-3-Junction-capacitance"><a href="#2-3-3-Junction-capacitance" class="headerlink" title="2.3.3 Junction capacitance"></a>2.3.3 Junction capacitance</h4><p>This capacitance originates from the depletion regions of the reverse-biased PN-junctions of drain and source. As we know, the junction capacitance consists of four parts which are the capacitance of the bottom-plate and that of three side walls. Here, we can use the following equation to express the junction capacitance.<br>$$ C _ {diff} = C _ {bottom} + C _ {SW} = C_j \times AREA + C _ {JSW} \times PERIMETER = C_jL_sW + C _ {jsw}(2L_s + W) \tag{2.24} $$<br>where C<sub>j</sub> stands for junction capacitance per unit area of the bottom plate and C<sub>jsw</sub> stands for the junction capacitance per unit perimeter of the side wall.<br><img src="mos.png" alt="Figure 2-2 MOS Transistor"><br>From this foil, we can get all the capacitances of the MOS transistor.</p>
+<table>
+<thead>
+<tr>
+<th align="center">C<sub>GS</sub></th>
+<th align="center">C<sub>GD</sub></th>
+<th align="center">C<sub>SB</sub></th>
+<th align="center">C<sub>GB</sub></th>
+<th align="center">C<sub>DB</sub></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">C<sub>GSO</sub> + C<sub>GCS</sub></td>
+<td align="center">C<sub>GDO</sub> + C<sub>GCD</sub></td>
+<td align="center">C<sub>Sdiff</sub></td>
+<td align="center">C<sub>GCB</sub></td>
+<td align="center">C<sub>Ddiff</sub></td>
+</tr>
+</tbody></table>
+<p>The following table summarizes some capacitances in 0.25um CMOS process.</p>
+<table>
+<thead>
+<tr>
+<th align="center">&nbsp;</th>
+<th align="center">C<sub>ox</sub><br>(fF/&mu;m<sup>2</sup>)</th>
+<th align="center">C<sub>o</sub><br>(fF/&mu;m)</th>
+<th align="center">C<sub>j</sub><br>(fF/&mu;m<sup>2</sup>)</th>
+<th align="center">m<sub>j</sub></th>
+<th align="center">&phi;<sub>b</sub><br>(V)</th>
+<th align="center">C<sub>jsw</sub><br>(fF/&mu;m)</th>
+<th align="center">m<sub>jsw</sub></th>
+<th align="center">&phi;<sub>bsw</sub><br>(V)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NMOS</td>
+<td align="center">6</td>
+<td align="center">0.31</td>
+<td align="center">2</td>
+<td align="center">0.5</td>
+<td align="center">0.9</td>
+<td align="center">0.28</td>
+<td align="center">0.44</td>
+<td align="center">0.9</td>
+</tr>
+<tr>
+<td align="center">PMOS</td>
+<td align="center">6</td>
+<td align="center">0.27</td>
+<td align="center">1.9</td>
+<td align="center">0.48</td>
+<td align="center">0.9</td>
+<td align="center">0.22</td>
+<td align="center">0.32</td>
+<td align="center">0.9</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-Secondary-Effect-Sub-Micron-MOS-Transistor"><a href="#2-4-Secondary-Effect-Sub-Micron-MOS-Transistor" class="headerlink" title="2.4 Secondary Effect (Sub-Micron MOS Transistor)"></a>2.4 Secondary Effect (Sub-Micron MOS Transistor)</h3><p>For sub-micron MOS transistor, there are mainly two secondary effects and we will briefly introduce these two effects in this section.</p>
+<h4 id="2-4-1-Threshold-Variations"><a href="#2-4-1-Threshold-Variations" class="headerlink" title="2.4.1 Threshold Variations"></a>2.4.1 Threshold Variations</h4><p>There are two factors which can influence the threshold of MOS transistor.<br>The first factor is the shrinking length. The depletion regions of the source and reverse-biased drain junction become more important with channel length scaling down. Therefore, we do not need high supply voltage to turn on the transistor and the threshold voltage will decrease with channel length scaling down.<br>The second one is V<sub>DS</sub>. The rising of the V<sub>DS</sub> increases the width of the drain-junction depletion region and then the threshold voltage decreases accordingly and this kind of effect is called the drain-induced barrier lowering.</p>
+<h4 id="2-4-2-Subthreshold-conduction"><a href="#2-4-2-Subthreshold-conduction" class="headerlink" title="2.4.2 Subthreshold conduction"></a>2.4.2 Subthreshold conduction</h4><p>Ideally, when V<sub>GS</sub> &lt; V<sub>T</sub>, there is no current flowing through the transistor and the transistor is turned off. However, in reality, at this point is not turned off completely and there is still small current flowing in the transistor and this current is called as leakage current. And this current can be expressed as the following equation.<br>$$ I_D = I_S e^{\frac {\frac {V _ {GS}} {nkT}} q} (1 - e^{\frac {\frac {V _ {DS}} {kT}} q} )(1 + \lambda V _ {DS}) \tag{2.25} $$</p>
+<p>And the slope factor S is  &Delta;V<sub>GS</sub> for I<sub>D2</sub>/I<sub>D1</sub> = 10(Unit: mV/decade) and can be expressed as follows:<br>$$ S = \frac {nkT} q ln(10) \tag{2.26} $$<br>and the typical value for S is from 60 to 100 mV/decade.<br>Due to this effect, we can find out the transition from on to off is not abrupt and instead is gradual and this effect contributes to the increase of power consumption and is still a big issue for IC design.</p>
+<p>All above is the brief introduction to the Diode, MOS Transistor and some of the characteristics they possess. Thank you for your reading.</p>
+
+				
+        </div>
+		
+		
+				<ul class="post-copyright">
+  <li class="post-copyright-author">
+  <strong>本文作者:  </strong>Xuanyi Li
+  </li>
+  <li class="post-copyright-link">
+  <strong>本文链接:  </strong>
+  <a href="/2020/02/19/The-MOSFET-Transistor/" target="_blank" title="The Diode and The MOSFET Transistor">The Diode and The MOSFET Transistor</a>
+  </li>
+  <li class="post-copyright-date">
+  <strong>发布时间: </strong>2020-02-19-19:56:00
+  </li>
+  <li class="post-copyright-license">
+	<strong>版权声明:   </strong>
+	本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+	许可协议。转载请注明出处！
+  </li>
+</ul>
+		
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MOS/" rel="tag">MOS</a>,&nbsp;<a class="has-link-grey -link" href="/tags/VLSI/" rel="tag">VLSI</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="level is-mobile">
+		
+			
+        </div>
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/receive_from_alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/receive_from_wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/08/Come-on-WuHan/">
+                <span class="level-item">Come on, Wuhan! Come on, China!</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'f0c3c66f70376e3c7e15',
+        clientSecret: 'ff8fca332eb5b034197f2d224bc623ec9a620021',
+        id: 'ee907e960d6362a15910f772b3351ea5',
+        repo: 'captainnotseeingthesea.github.io',
+        owner: 'captainnotseeingthesea',
+        admin: "captainnotseeingthesea",
+        createIssueManually: true,
+        distractionFreeMode: true
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.jpg" alt="xuanyi">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        xuanyi
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Student
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China,Bayannur</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/captainnotseeingthesea" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/captainnotseeingthesea">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Weibo" href="https://www.weibo.com/u/6050255746/home?wvr=5">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+		<iframe style="position:inherit; width:100%; border:0" frameborder="no" border="0" marginwidth="0" marginheight="0" height=86 src="//music.163.com/outchain/player?type=2&id=525241601&auto=0&height=66"></iframe>
+    </div>
+</div>
+    
+        
+
+    <div class="card widget column-left is-sticky" id="toc" style="max-height: 400px;overflow: auto;">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-The-Diode"><span>1 The Diode</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-Significance"><span>1.1 Significance</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-Depletion-Region"><span>1.2 Depletion Region</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-Static-behavior"><span>1.3 Static behavior</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-3-1-Forward-Bias"><span>1.3.1 Forward Bias</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-2-Reverse-Bias"><span>1.3.2 Reverse Bias</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-3-Ideal-diode-equation"><span>1.3.3 Ideal diode equation</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-4-First-order-diode-model"><span>1.3.4 First-order diode model</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-4-Dynamic-behavior"><span>1.4 Dynamic behavior</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-4-1-Capacitor-of-the-depletion-region"><span>1.4.1 Capacitor of the depletion region</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-4-2-Equivalent-capacitance-module"><span>1.4.2 Equivalent capacitance module</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-5-Secondary-Effects"><span>1.5 Secondary Effects</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-5-1-Resister-in-the-doped-neutral-regions"><span>1.5.1 Resister in the doped neutral regions</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-5-2-Avalanche-breakdown"><span>1.5.2 Avalanche breakdown</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-6-SPICE-Diode-Model"><span>1.6 SPICE Diode Model</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-The-MOSFET"><span>2 The MOSFET</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-Introduction"><span>2.1 Introduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-1-Structure"><span>2.1.1 Structure</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-1-2-Significance"><span>2.1.2 Significance</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-1-3-Essence"><span>2.1.3 Essence</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-2-Static-Behavior"><span>2.2 Static Behavior</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-2-1-The-formation-of-conducting-channel"><span>2.2.1 The formation of conducting channel</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-2-Calculation-of-the-threshold-voltage-cut-off-region"><span>2.2.2 Calculation of the threshold voltage(cut-off region)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-3-Long-channel-device"><span>2.2.3 Long channel device</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-4-Short-channel-device"><span>2.2.4 Short channel device</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-5-Switch-mode-Resistor"><span>2.2.5 Switch mode (Resistor)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-3-Dynamic-behavior"><span>2.3 Dynamic behavior</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-3-1-MOS-structure-capacitance"><span>2.3.1 MOS structure capacitance</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-2-Channel-capacitance"><span>2.3.2 Channel capacitance</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-3-Junction-capacitance"><span>2.3.3 Junction capacitance</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-4-Secondary-Effect-Sub-Micron-MOS-Transistor"><span>2.4 Secondary Effect (Sub-Micron MOS Transistor)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-4-1-Threshold-Variations"><span>2.4.1 Threshold Variations</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-2-Subthreshold-conduction"><span>2.4.2 Subthreshold conduction</span>
+        </a></li></ul></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/02/19/The-MOSFET-Transistor/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200220164249.jpg" alt="The Diode and The MOSFET Transistor">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-19T11:56:00.000Z">2020-02-19</time></div>
+                    <a href="/2020/02/19/The-MOSFET-Transistor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">The Diode and The MOSFET Transistor</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/study/">study</a> / <a class="has-link-grey -link" href="/categories/study/digital-circuit/">digital circuit</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/08/Come-on-WuHan/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200209124342.jpg" alt="Come on, Wuhan! Come on, China!">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-08T14:20:38.000Z">2020-02-08</time></div>
+                    <a href="/2020/02/08/Come-on-WuHan/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Come on, Wuhan! Come on, China!</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">life</a> / <a class="has-link-grey -link" href="/categories/life/writing/">writing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/05/Spring-has-come/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/captainnotseeingthesea/FigureBed/master/images/20200210111624.jpg" alt="Spring has come!">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-05T07:23:36.000Z">2020-02-05</time></div>
+                    <a href="/2020/02/05/Spring-has-come/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring has come!</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">life</a> / <a class="has-link-grey -link" href="/categories/life/writing/">writing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MOS/">
+                        <span class="tag">MOS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VLSI/">
+                        <span class="tag">VLSI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/diary/">
+                        <span class="tag">diary</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="The Diode and The MOSFET Transistor" height="28">
+                
+                </a>
+				
+				<span id="timeDate" class="is-size-7">载入天数...</span><span id="times" class="is-size-7">载入时分秒...</span>
+				<script>
+					var now = new Date(); 
+					function createtime() { 
+						var grt= new Date("2/6/2020 15:54:15");//此处修改你的建站时间或者网站上线时间 
+						now.setTime(now.getTime()+250); 
+						days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+						hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+						if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+						mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+						seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+						snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+						document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+						document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+					} 
+					setInterval("createtime()",250);
+				</script>
+                <p class="is-size-7">
+                &copy; 2020 Xuanyi Li&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span>本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次</span>
+                <span>| 本站访客数<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>人次</span>
+				
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/captainnotseeingthesea">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://captainnotseeingthesea.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+	<!--动态线条背景-->
+	<script type="text/javascript"color="220,220,220" opacity='0.7' count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+	</script>
+	<!--3D飘雪花特效 整理by yaxi.net-->
+	<script type="text/javascript" src="/js/src/snow.js"></script>
+	<style type="text/css">
+	.snow-container{
+	position:fixed;
+	top:0;left:0;
+	width:100%;
+	height:100%;
+	pointer-events:none;
+	z-index:100001;
+	}
+	</style>
+	<div class="snow-container"></div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
